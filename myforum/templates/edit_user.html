@@ -1,0 +1,17 @@
+<%inherit file="base.html"/>
+
+
+<%def name="page_content()">
+
+<form method="post" action="${url_for('edit_user', id=user.user_id)}">
+	<div class="input-section">
+		<label>User full name</label>
+		<textarea name="full_name">${user.full_name}</textarea>
+	</div>
+    <div class="input-section">
+		<label>User email</label>
+		<textarea name="email">${user.email}</textarea>
+	</div>
+    <input type="submit" value="Save changes">
+</form>
+</%def>

@@ -1,0 +1,50 @@
+<%inherit file="base.html"/>
+
+
+<%def name="page_content()">
+
+<h2 >Status: ${status.status}</h2>
+<h2 >Last id: ${status.last_id}</h2>
+<h2 >Exception: ${status.error}</h2>
+
+% if status.status == 'ready':
+<a href="${url_for('users')}">Users list</a>
+<a href="${url_for('letters')}">Letters list</a>
+%endif
+%if letters:
+
+    <form  action="${url_for('home')}" method="post">
+    <select name="select" required>
+        <option></option>
+    %for letter in letters:
+        <option  value="${letter.newsletter_id}">${letter.newsletter_name}</option>
+    %endfor
+    </select>
+    <input type="submit" value="Send newsletter">
+    </form>
+%endif
+
+%if status.status == 'sending':
+    <form  action="${url_for('stop')}" method="post">
+        <input type="submit" value="Stop">
+    </form>
+
+%elif status.status == 'stopped':
+     <form  action="${url_for('reset')}" method="post">
+        <input type="submit" value="Reset">
+    </form>
+    <form  action="${url_for('resume')}" method="post">
+        <input type="submit" value="Resume">
+    </form>
+%elif status.status == 'sending_error':
+    <form  action="${url_for('resume')}" method="post">
+        <input type="submit" value="Resume">
+    </form>
+    <form  action="${url_for('stop')}" method="post">
+        <input type="submit" value="Stop">
+    </form>
+%endif
+
+
+
+</%def>

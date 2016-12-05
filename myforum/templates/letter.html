@@ -1,0 +1,65 @@
+<%inherit file="base.html"/>
+<%def name="page_content()">
+<h3>Add letter</h3>
+<form method="post" action="${url_for('letters')}">
+	<div class="input-section">
+		<label>Newsletter name</label>
+		<input type="text" name="newsletter_name" />
+	</div>
+    <div class="input-section">
+		<label>From name</label>
+		<input name="from_name" />
+	</div>
+    <div class="input-section">
+		<label>From eMail</label>
+		<input name="from_email" />
+	</div>
+    <div class="input-section">
+		<label>Subject</label>
+		<input name="subject" />
+	</div>
+    <div class="input-section">
+		<label>Body text</label>
+		<input name="body_text" />
+	</div>
+    <div class="input-section">
+		<label>Body HTML</label>
+		<input name="body_html" />
+	</div>
+    <input type="submit" value="Add letter">
+</form>
+
+%if letters:
+<table>
+	<tr>
+		<th>newsletter_id</th>
+		<th>newsletter_name</th>
+        <th>from_name</th>
+        <th>from_email</th>
+        <th>subject</th>
+        <th>body_text</th>
+        <th>body_html</th>
+  </tr>
+	%for letter in letters:
+	<tr>
+	    <td>${letter.newsletter_id}</td>
+	    <td>${letter.newsletter_name}</td>
+	    <td>${letter.from_name}</td>
+        <td>${letter.from_email}</td>
+        <td>${letter.subject}</td>
+        <td>${letter.body_text}</td>
+        <td>${letter.body_html}</td>
+		<td><a href="${url_for('edit_letter', id = letter.newsletter_id)}">Edit</a></td>
+		<td><form method="post" action="${url_for('delete_letter', id = letter.newsletter_id)}">
+	            <input type="submit" value="Delete">
+            </form>
+        </td>
+	</tr>
+	%endfor
+</table>
+%else:
+   Empty
+%endif
+
+</%def>
+

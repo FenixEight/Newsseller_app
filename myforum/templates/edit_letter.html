@@ -1,0 +1,32 @@
+<%inherit file="base.html"/>
+
+
+<%def name="page_content()">
+<form method="post" action="${url_for('edit_letter', id=letter.newsletter_id)}">
+	<div class="input-section">
+		<label>Newsletter name</label>
+		<textarea name="newsletter_name">${letter.newsletter_name}</textarea>
+	</div>
+    <div class="input-section">
+		<label>From name</label>
+		<textarea name="from_name">${letter.from_name}</textarea>
+	</div>
+    <div class="input-section">
+		<label>From email</label>
+		<textarea name="from_email">${letter.from_email}</textarea>
+	</div>
+    <div class="input-section">
+		<label>Subject</label>
+		<textarea name="subject">${letter.subject}</textarea>
+	</div>
+    <div class="input-section">
+		<label>Body text</label>
+		<textarea name="body_text">${letter.body_text}</textarea>
+	</div>
+    <div class="input-section">
+		<label>Body HTML</label>
+		<textarea name="body_html">${letter.body_html}</textarea>
+	</div>
+    <input type="submit" value="Save changes">
+</form>
+</%def>
